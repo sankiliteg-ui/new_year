@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy New Year Annu | Special Edition 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Parisienne&display=swap" rel="stylesheet">
+
+<style>
+/* --- BASE & ATMOSPHERE --- */
+*, *:after, *:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+  /* Deeper, richer night sky gradient */
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  color: #fff;
+}
+
+/* --- BACKGROUND BOKEH PARTICLES (New Addition) --- */
+/* Creates floating blurred lights for atmosphere */
+.bokeh {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.bokeh span {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(244, 143, 177, 0.3);
+  box-shadow: 0 0 20px rgba(122, 143, 232, 0.3);
+  animation: float_bokeh var(--duration) linear infinite;
+  bottom: -150px;
+  filter: blur(8px);
+}
+
+/* --- THE YEAR ANIMATION (2025 -> 2026) --- */
+.ano_novo {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 200px 100px 0px 0px;
+  z-index: 5;
+  /* Filter to make the old year blur out */
+  filter: drop-shadow(0 0 15px rgba(122, 143, 232, 0.8));
+}
+
+.ano_novo > span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 150px;
+  font-weight: 900;
+  color: #7a8fe8;
+}
+
+.ano_novo > span:first-child { margin-right: 15px; }
+
+/* The Old Digit (5) */
+span.old-year {
+  position: absolute;
+  top: 50%; right: 50%;
+  margin-right: -180px;
+  transform: translateY(-50%);
+  animation: go_away 5s ease-in-out 5s forwards;
+}
+
+/* The New Digit (6) with extra glow */
+span.new-year {
+  position: absolute;
+  right: 0%;
+  margin-right: -180px;
+  font-size: 180px;
+  color: #fff;
+  /* Stronger Neon Glow */
+  text-shadow: 0 0 20px #fff, 0 0 40px #f48fb1, 0 0 80px #f48fb1;
+  animation: come_in 6s ease-in-out forwards;
+}
+
+/* Balloon String */
+span.new-year:before {
+  content: '';
+  width: 0px; height: 6px; display: block;
+  border-radius: 3px; background: #7a8fe8;
+  position: absolute; top: 55px; left: 15px; z-index: -1;
+  animation: deliver_balloon 1s ease-in-out 4s;
+}
+
+/* --- BALLOON (Enhanced) --- */
+.balao {
+  width: 100px; height: 100px; display: block;
+  background: radial-gradient(circle at 30% 30%, #ffe99d, #e8d57a);
+  border-radius: 50%;
+  position: absolute; top: 50%; margin-top: -165px; right: 0%; margin-right: -200px;
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.2), 0 0 20px rgba(232, 213, 122, 0.6);
+  animation: balloon_path 10s ease-in-out forwards;
+}
+.balao:before {
+  content: ''; width: 0; height: 0; border-style: solid;
+  border-width: 0 10px 20px 10px;
+  border-color: transparent transparent #b19b32 transparent;
+  position: absolute; left: 50%; margin-left: -10px; bottom: -10px; z-index: -1;
+}
+.balao:after {
+  content: ''; width: 2px; height: 100px; display: block;
+  background: rgba(255,255,255,0.6);
+  position: absolute; left: 50%; margin-left: -1px; bottom: -110px;
+}
+
+/* --- FIREWORKS (Subtler to let the card shine) --- */
+.fogos {
+  width: 100%; height: 100%; display: block;
+  position: absolute; top: 0; left: 0; overflow: hidden; z-index: 2;
+}
+.fogos > div {
+  border: 2px solid rgba(255,255,255,0.6);
+  position: absolute; opacity: 0;
+  animation: launch_firework 1.5s ease-in-out 7.5s forwards;
+}
+.fogos > div.f1 { left: 20%; top: 40%; }
+.fogos > div.f2 { left: 15%; top: 70%; }
+.fogos > div.f3 { right: 20%; top: 40%; }
+.fogos > div.f4 { right: 15%; top: 70%; }
+.fogos > div span {
+  width: 6px; height: 6px; display: block;
+  position: absolute; top: 0; left: 0; opacity: 0;
+  animation: burst_firework 0.5s ease-in-out 8.5s forwards;
+}
+.fogos > div span:nth-child(1) { transform: rotate(0deg); }
+.fogos > div span:nth-child(2) { transform: rotate(120deg); }
+.fogos > div span:nth-child(3) { transform: rotate(240deg); }
+.fogos > div span:before, .fogos > div span:after {
+  content: ''; width: 2px; height: 50px; display: block;
+  background: linear-gradient(#fff, #f5cc06); position: absolute; left: 2px;
+}
+.fogos > div span:before { top: -60px; }
+.fogos > div span:after { bottom: -60px; }
+
+
+/* --- THE SPECIAL "ANNU" CARD (Ultra Enhanced) --- */
+.message-card-container {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  opacity: 0;
+  /* Appears after fireworks, then gently floats */
+  animation: card_appear 2s ease-out 9s forwards, card_float 6s ease-in-out 11s infinite alternate;
+}
+
+.message-card {
+  width: 90vw; max-width: 380px;
+  text-align: center;
+  /* Premium Frost Glass Effect */
+  background: rgba(40, 40, 70, 0.4);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5),
+              inset 0 0 30px rgba(255,255,255,0.1);
+  border-radius: 30px;
+  padding: 45px 25px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Subtle shine effect across the card */
+.message-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    transform: rotate(30deg);
+    pointer-events: none;
+}
+
+
+/* Rotating glowing border for DP */
+.profile-pic-wrapper {
+  width: 130px; height: 130px;
+  margin: 0 auto 25px auto;
+  position: relative;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.profile-pic-wrapper::before {
+    content: ''; position: absolute;
+    width: 100%; height: 100%; border-radius: 50%;
+    /* Animated colorful border */
+    background: linear-gradient(45deg, #f48fb1, #7a8fe8, #e8d57a, #f48fb1);
+    background-size: 400% 400%;
+    animation: border_rotate 5s linear infinite;
+    filter: blur(5px);
+    z-index: 1;
+}
+
+.profile-pic {
+  width: 118px; height: 118px;
+  border-radius: 50%;
+  z-index: 2;
+  border: 3px solid #fff;
+  overflow: hidden;
+}
+
+.profile-pic img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.feliz-text {
+  font-family: 'Parisienne', cursive; /* More elegant font */
+  font-size: 42px;
+  /* Gradient text */
+  background: linear-gradient(to right, #f48fb1, #fff, #7a8fe8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 5px rgba(244, 143, 177, 0.5));
+}
+
+.personal-note {
+  font-family: 'Montserrat', sans-serif;
+  color: #e0e0e0;
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.highlight-name {
+  font-weight: 900;
+  font-size: 1.4em;
+  color: #fff;
+  letter-spacing: 1px;
+  /* Intense name glow */
+  text-shadow: 0 0 10px #e8d57a, 0 0 20px #e8d57a;
+  display: inline-block;
+  animation: name_pulse 2s infinite alternate;
+}
+
+
+/* --- ANIMATIONS --- */
+
+/* Floating bokeh particles */
+@keyframes float_bokeh {
+  0% { transform: translateY(0) translateX(0); opacity: 1; }
+  100% { transform: translateY(-120vh) translateX(50px); opacity: 0; }
+}
+
+/* Rotating photo border */
+@keyframes border_rotate {
+    0% { background-position: 0% 50%; transform: rotate(0deg); }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; transform: rotate(360deg); }
+}
+
+/* Name pulsing emphasis */
+@keyframes name_pulse {
+  from { text-shadow: 0 0 10px #e8d57a, 0 0 20px #e8d57a; transform: scale(1); }
+  to { text-shadow: 0 0 20px #e8d57a, 0 0 40px #e8d57a, 0 0 60px #ffedb3; transform: scale(1.05); }
+}
+
+/* Card appearing */
+@keyframes card_appear {
+  0% { opacity: 0; transform: translate(-50%, -20%) scale(0.8); }
+  70% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Gentle floating of the final card */
+@keyframes card_float {
+  from { transform: translate(-50%, -50%); }
+  to { transform: translate(-50%, -55%); }
+}
+
+/* Existing animations (adjusted timings) */
+@keyframes come_in {
+  0% { right: 0%; }
+  66% { right: 50%; margin-right: -300px; }
+  90% { right: 50%; margin-right: -300px; }
+  100% { right: 50%; }
+}
+@keyframes balloon_path {
+  0% { right: 0%; }
+  40% { right: 50%; margin-right: -300px; }
+  50% { right: 50%; margin-right: -200px; top: 50%; }
+  100% { top: -100%; right: 50%; }
+}
+@keyframes deliver_balloon {
+  0% { transform: rotate(-30deg); width: 40px; }
+  100% { transform: rotate(-150deg); width: 70px; }
+}
+@keyframes go_away {
+  0% { top: 50%; opacity: 1;}
+  100% { top: -150%; opacity: 0; }
+}
+@keyframes launch_firework {
+  0% { margin-top: 100%; opacity: 0; width: 2px; height: 30px; border-radius: 50%; }
+  75% { margin-top: 0%; opacity: 1; width: 2px; height: 30px; border-radius: 50%; }
+  80% { margin-top: 0px; margin-left: 0px; opacity: 1; width: 10px; height: 10px; border-radius: 50%; transform: scale(0.2); }
+  100% { opacity: 1; width: 10px; height: 10px; border-radius: 50%; transform: scale(1); }
+}
+@keyframes burst_firework {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+</style>
+</head>
+
+<body>
+
+  <div class="bokeh">
+    <span style="left: 10%; width: 50px; height: 50px; --duration: 15s;"></span>
+    <span style="left: 30%; width: 30px; height: 30px; --duration: 11s; background: rgba(122, 143, 232, 0.3);"></span>
+    <span style="left: 50%; width: 70px; height: 70px; --duration: 18s;"></span>
+    <span style="left: 70%; width: 40px; height: 40px; --duration: 13s; background: rgba(232, 213, 122, 0.3);"></span>
+    <span style="left: 90%; width: 60px; height: 60px; --duration: 16s;"></span>
+     <span style="left: 20%; width: 20px; height: 20px; --duration: 9s; background: rgba(255, 255, 255, 0.2);"></span>
+  </div>
+
+  <div class="ano_novo">
+    <span>202</span>
+    <span class="old-year">5</span>
+    <span class="new-year">6</span>
+    <div class="balao"></div>
+  </div>
+
+  <div class="fogos">
+    <div class="f1"><span><i></i></span><span><i></i></span><span><i></i></span></div>
+    <div class="f2"><span><i></i></span><span><i></i></span><span><i></i></span></div>
+    <div class="f3"><span><i></i></span><span><i></i></span><span><i></i></span></div>
+    <div class="f4"><span><i></i></span><span><i></i></span><span><i></i></span></div>
+  </div>
+
+  <div class="message-card-container">
+    <div class="message-card">
+      
+      <div class="profile-pic-wrapper">
+        <div class="profile-pic">
+          <img src="annuuu.jpeg" alt="Annu's Photo">
+        </div>
+      </div>
+
+      <div class="feliz-text">Happy New Year!</div>
+      
+      <p class="personal-note">
+        To my amazing bro, <br>
+        <span class="highlight-name">ANNU</span><br>
+        (My Bro)<br><br>
+        May 2026 bring you as much joy as you bring into my life. Cheers to more laughter, zero drama, and endless success!
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
